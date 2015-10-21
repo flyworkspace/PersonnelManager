@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llayout_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/textview_company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="company_name" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textview_contact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                tools:text="name" />
+
+            <TextView
+                android:id="@+id/textview_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                tools:text="保禄" />
+
+            <TextView
+                android:id="@+id/textview_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                tools:text="男" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textview_contact_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="15012345678" />
+
+        <TextView
+            android:id="@+id/textview_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="XX省XX市XX路500号3号楼2层1205" />
+
+        <TextView
+            android:id="@+id/textview_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="范围：河南省、湖北省、山东省" />
+
+        <TextView
+            android:id="@+id/textview_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="种类：售前、销售、售后" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>
