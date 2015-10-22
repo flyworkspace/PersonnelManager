@@ -5,19 +5,19 @@ package com.flyworkspace.person.model;
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
 
-import java.io.Serializable;
+import android.text.TextUtils;
 
 /**
  * Entity mapped to table "PERSON_INFO".
  */
-public class PersonInfo implements Serializable{
+public class PersonInfo{
 
     private Long id;
     /** Not-null value. */
     private String companyName;
     private String contactName;
     private String nickname;
-    private String sex;
+    private Integer sex;
     private String contactPhone;
     private String address;
     private String range;
@@ -34,7 +34,7 @@ public class PersonInfo implements Serializable{
         this.id = id;
     }
 
-    public PersonInfo(Long id, String companyName, String contactName, String nickname, String sex, String contactPhone, String address, String range, String category, String note) {
+    public PersonInfo(Long id, String companyName, String contactName, String nickname, Integer sex, String contactPhone, String address, String range, String category, String note) {
         this.id = id;
         this.companyName = companyName;
         this.contactName = contactName;
@@ -81,11 +81,11 @@ public class PersonInfo implements Serializable{
         this.nickname = nickname;
     }
 
-    public String getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
@@ -127,6 +127,32 @@ public class PersonInfo implements Serializable{
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getShareStr() {
+        StringBuffer stringBuffer = new StringBuffer();
+        if (!TextUtils.isEmpty(companyName)){
+            stringBuffer.append("公司:");
+            stringBuffer.append(companyName);
+            stringBuffer.append("\n");
+        }
+        if (!TextUtils.isEmpty(contactName)){
+            stringBuffer.append("联系人:");
+            stringBuffer.append(contactName);
+            stringBuffer.append("\n");
+        }
+        if (!TextUtils.isEmpty(contactPhone)){
+            stringBuffer.append("联系方式:");
+            stringBuffer.append(contactPhone);
+            stringBuffer.append("\n");
+        }
+        if (!TextUtils.isEmpty(address)){
+            stringBuffer.append("地址:");
+            stringBuffer.append("\n");
+            stringBuffer.append(address);
+            stringBuffer.append("\n");
+        }
+        return stringBuffer.toString();
     }
 
     // KEEP METHODS - put your custom methods here

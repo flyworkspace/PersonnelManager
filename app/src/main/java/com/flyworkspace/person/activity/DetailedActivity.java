@@ -24,7 +24,7 @@ public class DetailedActivity extends BaseActivity {
     private TextView tvCategory;
     private TextView tvNote;
     private PersonInfo personInfo;
-
+    private long personInfoId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +48,7 @@ public class DetailedActivity extends BaseActivity {
                 break;
             case R.id.action_edit:
                 Intent intent = new Intent(DetailedActivity.this, AddActivity.class);
-                intent.putExtra("person_info", personInfo);
+                intent.putExtra("person_info_id", personInfo.getId());
                 startActivity(intent);
                 break;
             case R.id.action_delete:
@@ -62,7 +62,7 @@ public class DetailedActivity extends BaseActivity {
     private void share() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, "你好 ");
+        intent.putExtra(Intent.EXTRA_TEXT, personInfo.getShareStr());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(Intent.createChooser(intent, getTitle()));
     }
@@ -108,18 +108,24 @@ public class DetailedActivity extends BaseActivity {
     protected void loadData() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            personInfo = (PersonInfo) bundle.getSerializable("person_info");
-            if (personInfo != null) {
-                tvCompany.setText(personInfo.getCompanyName());
-                tvContact.setText(personInfo.getContactName());
-                tvSex.setText(personInfo.getSex());
-                tvNickname.setText(personInfo.getNickname());
-                tvContactPhone.setText(personInfo.getContactPhone());
-                tvAddress.setText(personInfo.getAddress());
-                tvRange.setText(personInfo.getRange());
-                tvCategory.setText(personInfo.getCategory());
-                tvNote.setText(personInfo.getNote());
-            }
+            personInfoId = bundle.getLong("person_info_id");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        personInfo = DbManager.getPersonInfoDao(DetailedActivity.this).loadByRowId(personInfoId);
+        if (personInfo != null) {
+            tvCompany.setText(personInfo.getCompanyName());
+            tvContact.setText(personInfo.getContactName());
+            tvSex.setText(getResources().getStringArray(R.array.spinner_sex)[personInfo.getSex()]);
+            tvNickname.setText(personInfo.getNickname());
+            tvContactPhone.setText(personInfo.getContactPhone());
+            tvAddress.setText(personInfo.getAddress());
+            tvRange.setText(personInfo.getRange());
+            tvCategory.setText(personInfo.getCategory());
+            tvNote.setText(personInfo.getNote());
         }
     }
 }

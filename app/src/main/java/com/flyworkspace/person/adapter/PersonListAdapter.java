@@ -53,7 +53,7 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Vi
         this.mContext = context;
     }
 
-    public void setList(List<PersonInfo> dataset){
+    public void setList(List<PersonInfo> dataset) {
         mDataset.clear();
         mDataset.addAll(dataset);
     }
@@ -79,7 +79,7 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Vi
         holder.tvCompanyName.setText(personInfo.getCompanyName());
         holder.tvContactName.setText(personInfo.getContactName());
         holder.tvNickname.setText(personInfo.getNickname());
-        holder.tvSex.setText(personInfo.getSex());
+        holder.tvSex.setText(mContext.getResources().getStringArray(R.array.spinner_sex)[personInfo.getSex()]);
         holder.tvContactPhone.setText(personInfo.getContactPhone());
         holder.tvAddress.setText(personInfo.getAddress());
         holder.tvRange.setText(personInfo.getRange());
@@ -89,7 +89,7 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Vi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, DetailedActivity.class);
-                intent.putExtra("person_info", personInfo);
+                intent.putExtra("person_info_id", personInfo.getId());
                 mContext.startActivity(intent);
             }
         });

@@ -16,12 +16,14 @@ import android.widget.LinearLayout;
 
 import com.flyworkspace.person.R;
 import com.flyworkspace.person.adapter.PersonListAdapter;
+import com.flyworkspace.person.common.EnumData;
 import com.flyworkspace.person.dao.DaoMaster;
 import com.flyworkspace.person.dao.DaoSession;
 import com.flyworkspace.person.dao.PersonInfoDao;
 import com.flyworkspace.person.database.DbManager;
 import com.flyworkspace.person.model.PersonInfo;
 import com.flyworkspace.person.view.OnRcvScrollListener;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -34,10 +36,12 @@ public class MainActivity extends BaseActivity {
     private LinearLayoutManager linearLayoutManager;
     private SearchView mSearchView;
     private boolean isSearchViewVisible;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MobclickAgent.updateOnlineConfig(this);
     }
 
     @Override
@@ -63,20 +67,20 @@ public class MainActivity extends BaseActivity {
 
     private void initDatabase() {
         personInfoDao = DbManager.getPersonInfoDao(this);
-        if (personInfoDao.count() < 1) {
-            for (int i = 0; i < 100; i++) {
-                PersonInfo personInfo = new PersonInfo();
-                personInfo.setCompanyName("公司" + i);
-                personInfo.setContactName("张三");
-                personInfo.setNickname("保禄");
-                personInfo.setSex("男");
-                personInfo.setContactPhone("15012345678");
-                personInfo.setAddress("XX省XX市XX路500号3号楼2层1205");
-                personInfo.setRange("河南省、湖北省、山东省");
-                personInfo.setCategory("售前、销售、售后");
-                personInfoDao.insert(personInfo);
-            }
-        }
+//        if (personInfoDao.count() < 1) {
+//            for (int i = 0; i < 100; i++) {
+//                PersonInfo personInfo = new PersonInfo();
+//                personInfo.setCompanyName("公司" + i);
+//                personInfo.setContactName("张三");
+//                personInfo.setNickname("保禄");
+//                personInfo.setSex(2);
+//                personInfo.setContactPhone("15012345678");
+//                personInfo.setAddress("XX省XX市XX路500号3号楼2层1205");
+//                personInfo.setRange("河南省、湖北省、山东省");
+//                personInfo.setCategory("售前、销售、售后");
+//                personInfoDao.insert(personInfo);
+//            }
+//        }
     }
 
     @Override

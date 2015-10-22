@@ -9,6 +9,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.flyworkspace.person.R;
+import com.flyworkspace.person.common.EnumData;
 import com.flyworkspace.person.database.DbManager;
 import com.flyworkspace.person.model.PersonInfo;
 
@@ -55,12 +56,12 @@ public class AddActivity extends BaseActivity {
         initSexSpinner();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            personInfo = (PersonInfo) bundle.getSerializable("person_info");
+            long personInfoId = bundle.getLong("person_info_id");
+            personInfo = DbManager.getPersonInfoDao(this).loadByRowId(personInfoId);
             if (personInfo != null) {
                 etCompany.setText(personInfo.getCompanyName());
                 etContact.setText(personInfo.getContactName());
-                spinnerSex.setSelection(1);
-//                spinnerSex.setText(personInfo.getSex());
+                spinnerSex.setSelection(personInfo.getSex());
                 etNickname.setText(personInfo.getNickname());
                 etContactPhone.setText(personInfo.getContactPhone());
                 etAddress.setText(personInfo.getAddress());
@@ -110,7 +111,7 @@ public class AddActivity extends BaseActivity {
         }
         personInfo.setCompanyName(etCompany.getText().toString());
         personInfo.setContactName(etContact.getText().toString());
-        personInfo.setSex("");
+        personInfo.setSex(spinnerSex.getSelectedItemPosition());
         personInfo.setNickname(etNickname.getText().toString());
         personInfo.setContactPhone(etContactPhone.getText().toString());
         personInfo.setAddress(etAddress.getText().toString());

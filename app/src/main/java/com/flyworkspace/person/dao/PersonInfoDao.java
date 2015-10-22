@@ -27,7 +27,7 @@ public class PersonInfoDao extends AbstractDao<PersonInfo, Long> {
         public final static Property CompanyName = new Property(1, String.class, "companyName", false, "COMPANY_NAME");
         public final static Property ContactName = new Property(2, String.class, "contactName", false, "CONTACT_NAME");
         public final static Property Nickname = new Property(3, String.class, "nickname", false, "NICKNAME");
-        public final static Property Sex = new Property(4, String.class, "sex", false, "SEX");
+        public final static Property Sex = new Property(4, Integer.class, "sex", false, "SEX");
         public final static Property ContactPhone = new Property(5, String.class, "contactPhone", false, "CONTACT_PHONE");
         public final static Property Address = new Property(6, String.class, "address", false, "ADDRESS");
         public final static Property Range = new Property(7, String.class, "range", false, "RANGE");
@@ -52,7 +52,7 @@ public class PersonInfoDao extends AbstractDao<PersonInfo, Long> {
                 "\"COMPANY_NAME\" TEXT NOT NULL ," + // 1: companyName
                 "\"CONTACT_NAME\" TEXT," + // 2: contactName
                 "\"NICKNAME\" TEXT," + // 3: nickname
-                "\"SEX\" TEXT," + // 4: sex
+                "\"SEX\" INTEGER," + // 4: sex
                 "\"CONTACT_PHONE\" TEXT," + // 5: contactPhone
                 "\"ADDRESS\" TEXT," + // 6: address
                 "\"RANGE\" TEXT," + // 7: range
@@ -87,9 +87,9 @@ public class PersonInfoDao extends AbstractDao<PersonInfo, Long> {
             stmt.bindString(4, nickname);
         }
  
-        String sex = entity.getSex();
+        Integer sex = entity.getSex();
         if (sex != null) {
-            stmt.bindString(5, sex);
+            stmt.bindLong(5, sex);
         }
  
         String contactPhone = entity.getContactPhone();
@@ -132,7 +132,7 @@ public class PersonInfoDao extends AbstractDao<PersonInfo, Long> {
             cursor.getString(offset + 1), // companyName
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // contactName
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // nickname
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // sex
+            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // sex
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // contactPhone
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // address
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // range
@@ -149,7 +149,7 @@ public class PersonInfoDao extends AbstractDao<PersonInfo, Long> {
         entity.setCompanyName(cursor.getString(offset + 1));
         entity.setContactName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setNickname(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setSex(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setSex(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
         entity.setContactPhone(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setAddress(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setRange(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));

@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.flyworkspace.person.R;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by jinpengfei on 15-10-13.
@@ -30,6 +31,19 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
             mToolbar.setTitleTextColor(0xFFFFFFFF);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override
